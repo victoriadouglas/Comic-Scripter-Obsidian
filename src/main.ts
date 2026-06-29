@@ -60,8 +60,7 @@ function processChunk(el: HTMLElement, settings: ComicScripterSettings, ctx: Mar
   const frontmatter = (ctx.frontmatter ?? {}) as Record<string, unknown>;
   const root =
     el.closest<HTMLElement>(".markdown-preview-view") ??
-    el.closest<HTMLElement>(".markdown-rendered") ??
-    (el.ownerDocument.body as HTMLElement);
+    el.closest<HTMLElement>(".markdown-rendered");
 
   // Detect a fresh render: Obsidian clears the preview container before
   // re-rendering, so if there are no change-headings yet and no render ID
