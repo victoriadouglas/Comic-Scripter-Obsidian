@@ -1,34 +1,26 @@
-name: Release Obsidian plugin
-
+name: Build and Release
 on:
   push:
     branch: [ main ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write # Required for attestation
+      attestations: write # Required for attestation
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 'lts/*', cache: 'npm'}
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/attest-build-provenance@v4
         with:
-          node-version: "18.x"
-
-      - name: Build plugin
-        run: |
-          npm install
-          npm run build
-
-      - name: Create release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          tag="${GITHUB_REF#refs/tags/}"
-
-          gh release create "$tag" \
-            --title="$tag" \
-            --draft \
-            main.js manifest.json styles.css
+          subject-path: 'main.js' # Add other files (manifest.json, styles.css) here
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            main.js
+            manifest.json
+            styles.css
