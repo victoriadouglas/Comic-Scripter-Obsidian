@@ -1,0 +1,53 @@
+/*
+
+This CSS file will be included with your plugin, and
+available in the app when your plugin is enabled.
+
+If your plugin does not need CSS, delete this file.
+
+*/
+
+.change-heading-h2 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.change-heading-h4 {
+    margin-left: 2rem;
+    font-style: italic;
+    margin-bottom: 2px;
+    margin-top: 0;
+}
+
+.change-heading-hr-panel {
+    border-left:solid;
+    border-color: var(--color-accent);
+    padding-left: 0.4rem;
+}
+
+.change-heading-hr {
+    padding-top: 0.4rem;
+    border-top:solid;
+    border-color: var(--color-accent);
+}
+
+.change-heading-dialogue {
+    text-transform: uppercase;
+    padding-left: 2rem;
+    font-weight: 700;
+    padding-bottom: 0;
+    font-size: 1.3rem;
+}
+
+p:has(> .change-heading-dialogue) {
+    margin-bottom: 0;
+}
+
+.setting-item-description {
+    font-size: 1rem;
+    padding-left: 3rem;
+}
+
+.cm-line:has(> .change-heading-h4) {
+    height:4rem;
+}
