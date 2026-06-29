@@ -2,8 +2,7 @@ name: Release Obsidian plugin
 
 on:
   push:
-    tags:
-      - "*"
+    branch: [ main ]
 
 jobs:
   build:
