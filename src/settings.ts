@@ -56,22 +56,22 @@ export class ComicScripterSettingTab extends PluginSettingTab {
                 }));
 
 		new Setting(containerEl).setName('Instructions').setHeading();
-		const explanationPage = containerEl.createEl('p', {
+		containerEl.createEl('p', {
 			text: 'Designate a Page by typing "Page" or a capital "P" on its own line.',
 			cls: 'setting-item-description'
 		});
 
-		const explanationPanel = containerEl.createEl('p', {
+		containerEl.createEl('p', {
 			text: 'Designate a Panel by typing "Panel" or a lowercase "p" on its own line.',
 			cls: 'setting-item-description'
 		});
 
-		const explanationDialogue = containerEl.createEl('p', {
+		containerEl.createEl('p', {
 			text: 'Designate Dialogue with a Character name followed by a color. Also works for captions, descriptions, or SFX.',
 			cls: 'setting-item-description'
 		});
 
-		const explanationhandedness = containerEl.createEl('p', {
+		containerEl.createEl('p', {
 			text: 'Add Page Handedness per script with the frontmatter property "Page Start". Set it to "Right", "R", "Left", "L", or "none" to override the default setting.',
 			cls: 'setting-item-description'
 		});

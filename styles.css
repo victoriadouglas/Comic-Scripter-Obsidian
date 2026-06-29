@@ -39,15 +39,10 @@ If your plugin does not need CSS, delete this file.
     font-size: 1.3rem;
 }
 
-p:has(> .change-heading-dialogue) {
-    margin-bottom: 0;
-}
+
 
 .setting-item-description {
     font-size: 1rem;
     padding-left: 3rem;
 }
 
-.cm-line:has(> .change-heading-h4) {
-    height:4rem;
-}

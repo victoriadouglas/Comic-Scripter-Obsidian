@@ -102,8 +102,7 @@ function processChunk(el: HTMLElement, settings: ComicScripterSettings, ctx: Mar
         const sideLabel = handednessLabel(changeCount, settings, frontmatter);
 
         if (lines.length === 1) {
-          const h = document.createElement("h2");
-          h.style.fontWeight = "bold";
+          const h = activeDocument.createElement("h2");
           h.textContent = `PAGE ${changeCount}${sideLabel}`;
           if (settings.hrRule === true) {
             h.className = "change-heading change-heading-h2 change-heading-hr";
@@ -113,8 +112,7 @@ function processChunk(el: HTMLElement, settings: ComicScripterSettings, ctx: Mar
           p.replaceWith(h);
         } else {
           lineNodes.forEach((n) => {
-            const h = document.createElement("h2");
-            h.style.fontWeight = "bold";
+            const h = activeDocument.createElement("h2");
             h.textContent = `PAGE ${changeCount}${sideLabel}`;
             if (settings.hrRule === true) {
               h.className = "change-heading change-heading-h2 change-heading-hr";
@@ -128,26 +126,22 @@ function processChunk(el: HTMLElement, settings: ComicScripterSettings, ctx: Mar
         smallCount++;
 
         if (lines.length === 1) {
-          const h = document.createElement("h4");
+          const h = activeDocument.createElement("h4");
           if (settings.hrRule === true) {
             h.className = "change-heading change-heading-h4 change-heading-hr-panel";
           } else {
             h.className = "change-heading change-heading-h4";
           }
-          h.style.fontWeight = "bold";
-          h.style.paddingLeft = "20px";
           h.textContent = `Panel ${smallCount}`;
           p.replaceWith(h);
         } else {
           lineNodes.forEach((n) => {
-            const h = document.createElement("h4");
+            const h = activeDocument.createElement("h4");
             if (settings.hrRule === true) {
               h.className = "change-heading change-heading-h4 change-heading-hr-panel";
             } else {
               h.className = "change-heading change-heading-h4";
             }
-            h.style.fontWeight = "bold";
-            h.style.paddingLeft = "20px";
             h.textContent = `Panel ${smallCount}`;
             n.parentNode?.replaceChild(h, n);
           });
@@ -158,13 +152,13 @@ function processChunk(el: HTMLElement, settings: ComicScripterSettings, ctx: Mar
           const colonIdx = raw.indexOf(":");
           if (colonIdx === -1) return;
 
-          const span = document.createElement("span");
+          const span = activeDocument.createElement("span");
           span.className = "change-heading-dialogue";
           span.textContent = raw.slice(0, colonIdx + 1);
 
-          const after = document.createTextNode(raw.slice(colonIdx + 1));
+          const after = activeDocument.createTextNode(raw.slice(colonIdx + 1));
 
-          const wrapper = document.createElement("p");
+          const wrapper = activeDocument.createElement("p");
           wrapper.appendChild(span);
           wrapper.appendChild(after);
 
@@ -180,7 +174,7 @@ function processChunk(el: HTMLElement, settings: ComicScripterSettings, ctx: Mar
 
   // Clear the render ID after a short delay so the next genuine re-render
   // (switching notes) correctly resets counters from zero again.
-  setTimeout(() => {
+  window.setTimeout(() => {
     root.removeAttribute(RENDER_ATTR);
   }, 500);
 }
@@ -192,7 +186,7 @@ class LivePreviewComicScripter extends WidgetType {
   }
 
   toDOM(): HTMLElement {
-    const el = document.createElement(this.level);
+    const el = activeDocument.createElement(this.level);
     el.className = `change-heading change-heading-${this.level}`;
     if (this.level === "h2" && this.hrRule) {
         el.classList.add("change-heading-hr");
@@ -204,15 +198,6 @@ class LivePreviewComicScripter extends WidgetType {
     return el;
   }
 
-  ignoreEvent(): boolean { return false; }
-}
-
-// HR widget (live preview, horizontal rule is built here to be injected as part of the main building loop)
-class HrWidget extends WidgetType {
-  toDOM(): HTMLElement {
-    const el = document.createElement("hr");
-    return el;
-  }
   ignoreEvent(): boolean { return false; }
 }
 
