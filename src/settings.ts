@@ -67,7 +67,7 @@ export class ComicScripterSettingTab extends PluginSettingTab {
 		});
 
 		containerEl.createEl('p', {
-			text: 'Designate Dialogue with a Character name followed by a color. Also works for captions, descriptions, or SFX.',
+			text: 'Designate Dialogue with a Character name followed by a colon. Also works for captions, descriptions, or SFX.',
 			cls: 'setting-item-description'
 		});
 
